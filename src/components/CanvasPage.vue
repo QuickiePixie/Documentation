@@ -83,7 +83,7 @@
     }
 
     .active-btn{
-        border:3px solid white;
+        border:3px solid black;
     }
     .canvas-container {
         width:100%;
