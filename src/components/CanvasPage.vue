@@ -43,14 +43,16 @@
             <div class="pixel-grid bg-white">
                 <canvas id="pixel-canvas" class="pixel-grid" width="512" height="512"> </canvas>
             </div>
-            <v-row class="flex my-5">
+            <v-row class="flex my-5 px-5">
                 <div id="description"></div>
                 <v-row class="w-100 flex">
                 <v-btn class="w-50" id="createDescription">Create Description</v-btn>
+                <v-circular-loader v-if="descriptionLoading"/>
                 <h4 class="text-capitalize w-50 px-3" id="descriptionText" hidden></h4>
                 </v-row>
                 <v-row class="w-100 flex">
                 <v-btn @click="downloadClick" class="w-50 mt-3" id="downloadImage">Save Image</v-btn>
+                <v-circular-loader v-if="downloadLoading"/>
                 <h5 class="w-50 px-3" id="downloadText" style="overflow-wrap: break-word; font-size: 0.8rem;" hidden></h5>
                 </v-row>
             </v-row>
@@ -90,13 +92,24 @@
         margin:auto;
     }
 
+    #pixel-canvas {
+      border: 1px solid black;
+    }
+
+    button[disabled] {
+      opacity: 0.8;
+    }
+
 </style>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+
+const descriptionLoading = ref(false);
+
+const downloadLoading = ref(false);
 
 const canvasSetup = () => {
-    console.log("SETTING UP CANVAS")
 const canvas = document.getElementById("pixel-canvas");
   const context = canvas.getContext("2d");
 
@@ -275,6 +288,7 @@ const canvas = document.getElementById("pixel-canvas");
   const createDescriptionButton = document.getElementById("createDescription");
   const descriptionText = document.getElementById("descriptionText");
     createDescriptionButton.addEventListener("click", async event => {
+        descriptionLoading.value = true;
         canvas.toBlob(async (imageBlob) => {
             const formData = new FormData();
             formData.append("image", imageBlob);
@@ -287,6 +301,9 @@ const canvas = document.getElementById("pixel-canvas");
                     data = data.charAt(0).toUpperCase() + data.slice(1) + ".";
                     descriptionText.innerHTML = data;
                     descriptionText.hidden = false;
+                })
+                .finally(() => {
+                  descriptionLoading.value = false;
                 })        
         }); 
     });
@@ -374,6 +391,7 @@ const canvas = document.getElementById("pixel-canvas");
     const downloadImageButton = document.getElementById("downloadImage");
     downloadImageButton.addEventListener("click", async () => {
         console.log("CKICKEDDOWNLOAD")
+      downloadLoading.value = true;
       const canvas = document.getElementById("pixel-canvas");
       const formData = new FormData();
       canvas.toBlob(async (imageBlob) => {
@@ -388,6 +406,9 @@ const canvas = document.getElementById("pixel-canvas");
           elmt.hidden=false;
           elmt.innerText = `External Link: https://quickie-pixie-docs.vercel.app/image/${id}`;
         })
+        .finally(e => {
+          downloadLoading.value = true;
+        })
       });
     });
     downloadImageButton.disabled = false;
@@ -395,5 +416,4 @@ const canvas = document.getElementById("pixel-canvas");
 }
 
 onMounted(canvasSetup);
-
 </script>

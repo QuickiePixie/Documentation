@@ -2,14 +2,14 @@ export default {
     defaultTheme: "quickiepixie",
     themes: {
       quickiepixie: {
-        dark: true,
+        dark: false,
         colors: {
-          primary: "#6750A4",
+          primary: "#ff6500",
           primaryContainer: "#EADDFF",
-          secondary: "#6750A4",
+          secondary: "#ff6500",
           onPrimary: "#FFFFFF",
           onPrimaryContainer: "#21005D",
-          surface: "#FEF7FF",
+          surface: "#ffa062",
           onSurface: "#1D1B20",
           surfaceActive: "#E8DEF8",
         },
