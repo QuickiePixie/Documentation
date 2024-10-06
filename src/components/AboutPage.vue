@@ -14,19 +14,19 @@
     team: [
         {
             name: "Chelsea Chan",
-            desc: "About chelsea"
+            desc: ""
         },
         {
             name: "Rachel Kwan",
-            desc: "About chelsea"
+            desc: ""
         },
                 {
             name: "Christine Zhao",
-            desc: "About chelsea"
+            desc: ""
         },
         {
             name: "Madison Majarais",
-            desc: "About chelsea"
+            desc: ""
         }
     ]
   }
