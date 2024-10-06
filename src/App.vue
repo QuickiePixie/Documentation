@@ -2,7 +2,7 @@
   <v-app>
     <v-main class="px-10 py-10">
       <AppHeader/>
-      <div class="main">
+      <div class="main py-7">
         <router-view />
       </div>
       <AppFooter/>
