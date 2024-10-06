@@ -3,10 +3,10 @@
     <h2 class="h2 subheader">Quick Draw</h2>
 
     <v-row class="flex mt-5">
-        <div>
+        <div class="canvas-container">
             <div>
-                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                    <div class="btn-group" role="group" aria-label="First group">
+                <v-row class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <v-row class="btn-group py-2 px-3 my-2 flex align-center" role="group" aria-label="First group">
                       <button id="penBtn" type="button" class="btn btn-outline tool-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen icon" viewBox="0 0 16 16">
                             <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
@@ -27,10 +27,10 @@
                             <path d="M6.192 2.78c-.458-.677-.927-1.248-1.35-1.643a3 3 0 0 0-.71-.515c-.217-.104-.56-.205-.882-.02-.367.213-.427.63-.43.896-.003.304.064.664.173 1.044.196.687.556 1.528 1.035 2.402L.752 8.22c-.277.277-.269.656-.218.918.055.283.187.593.36.903.348.627.92 1.361 1.626 2.068.707.707 1.441 1.278 2.068 1.626.31.173.62.305.903.36.262.05.64.059.918-.218l5.615-5.615c.118.257.092.512.05.939-.03.292-.068.665-.073 1.176v.123h.003a1 1 0 0 0 1.993 0H14v-.057a1 1 0 0 0-.004-.117c-.055-1.25-.7-2.738-1.86-3.494a4 4 0 0 0-.211-.434c-.349-.626-.92-1.36-1.627-2.067S8.857 3.052 8.23 2.704c-.31-.172-.62-.304-.903-.36-.262-.05-.64-.058-.918.219zM4.16 1.867c.381.356.844.922 1.311 1.632l-.704.705c-.382-.727-.66-1.402-.813-1.938a3.3 3.3 0 0 1-.131-.673q.137.09.337.274m.394 3.965c.54.852 1.107 1.567 1.607 2.033a.5.5 0 1 0 .682-.732c-.453-.422-1.017-1.136-1.564-2.027l1.088-1.088q.081.181.183.365c.349.627.92 1.361 1.627 2.068.706.707 1.44 1.278 2.068 1.626q.183.103.365.183l-4.861 4.862-.068-.01c-.137-.027-.342-.104-.608-.252-.524-.292-1.186-.8-1.846-1.46s-1.168-1.32-1.46-1.846c-.147-.265-.225-.47-.251-.607l-.01-.068zm2.87-1.935a2.4 2.4 0 0 1-.241-.561c.135.033.324.11.562.241.524.292 1.186.8 1.846 1.46.45.45.83.901 1.118 1.31a3.5 3.5 0 0 0-1.066.091 11 11 0 0 1-.76-.694c-.66-.66-1.167-1.322-1.458-1.847z"/>
                           </svg>
                       </button>
-                      <div id="colorInput">
+                      <div class="" id="colorInput">
                         <input type="color" id="colorPicker" class="toolbar" value="#000000">
                       </div>
-                      <div>
+                      <div class="mx-4">
                         <select name="size" id="gridSize" class="toolbar">
                             <option value="128">S</option>
                             <option value="64">M</option>
@@ -38,17 +38,21 @@
                             <option value="16">XL</option>
                           </select>
                           </div>
-                </div>
-            </div>
+                </v-row>
+            </v-row>
             <div class="pixel-grid bg-white">
                 <canvas id="pixel-canvas" class="pixel-grid" width="512" height="512"> </canvas>
             </div>
             <v-row class="flex my-5">
                 <div id="description"></div>
+                <v-row class="w-100 flex">
                 <v-btn class="w-50" id="createDescription">Create Description</v-btn>
                 <h4 class="text-capitalize w-50 px-3" id="descriptionText" hidden></h4>
+                </v-row>
+                <v-row class="w-100 flex">
                 <v-btn @click="downloadClick" class="w-50 mt-3" id="downloadImage">Save Image</v-btn>
-                <p class="w-50 px-3" id="downloadText" style="overflow-wrap: break-word; font-size: 0.8rem;" hidden></p>
+                <h5 class="w-50 px-3" id="downloadText" style="overflow-wrap: break-word; font-size: 0.8rem;" hidden></h5>
+                </v-row>
             </v-row>
         </div>
         </div>        
@@ -58,9 +62,34 @@
 
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
     .header {
         font-size: 5rem;
     }
+
+    .tool-btn {
+        padding: 0.3rem;
+        margin: 0.7rem;
+        border-radius: 4px;
+        border:3px solid transparent;
+    }
+
+    .tool-btn:hover {
+        border:3px solid white;
+    }
+
+    .active-btn{
+        border:3px solid white;
+    }
+    .canvas-container {
+        width:100%;
+        max-width: 600px;
+        height:auto;
+        margin:auto;
+    }
+
 </style>
 
 <script setup>

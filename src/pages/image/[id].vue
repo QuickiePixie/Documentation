@@ -3,7 +3,9 @@
     <h1 class="h3 header">Your QuickiePixie Masterpiece</h1>
     <v-row>
         <img :src="url" type="image/png"></img>
-        <a class="" :href="url" download="quickiepixie.png">Download as PNG</a>
+    </v-row>
+    <v-row>
+      <a class="" :href="url" download="quickiepixie.png">Download as PNG</a>
     </v-row>
     <v-row class="h4 flex-column">
       <div class="my-4">To share your work of art, use the link below:</div>
